@@ -1,0 +1,1 @@
+// .some() -> In .find() -> it will return the 'element'  in .some() it will return the 'true'
