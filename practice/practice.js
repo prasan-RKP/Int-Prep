@@ -1,168 +1,167 @@
-// Final conception
-// Q.1) multiply by 'n'
 
-// function multiply(n) {
-//    return function(num) {
-//         return num * n;
-//    }
+// Ans1)
+
+// const showDetail = async() => {
+//   const res = fetch('https://jsonplaceholder.typicode.com/users/1');
+//   const data = await res.json();
+//   console.log(data);
 // }
 
-// let numEx2 = multiply(2);
+// showDetail();
 
-// console.log(numEx2(5));
 
-//Q.2)Make a function secretPassword() that stores a password in a closure. It should return two functions:
-//one to set the password,
-//one to check if a given string matches the password.
+//Ans2) 
 
-// const secretPassword = () => {
-// let password = "";
-//     return {
-//         setPassword: (newPassword) => {
-//              password = newPassword;
-//         },
+// const waitMs = (ms) => {
 
-//         checkPassword: (str) => {
-//             return str === password;
-//         }
+//   const myPromise = new Promise((resolve)=> {
+//     setTimeout(()=> {
+//           resolve("Hello");
+//     }, ms)
+//   });
 
-//     }
+//   return myPromise;
 // }
 
-// const myPass = secretPassword();
+// const pr = waitMs(2000);
 
-// myPass.setPassword("mozillla");
-// console.log(myPass.checkPassword("mozillla"));
+// pr
+// .then(res => console.log(res))
+// .catch(err => console.log(err));
 
-/// ------------Medium ------------
 
-//Q.1) Adder with Initial Value
 
-// const Adder = (initialVal) => {
-//   let total = null;
-//   return function (val2) {
-//     total = initialVal + val2;
-//     return "The total is", total;
-//   };
-// };
+// Ans3) Handle Errors with Try/CatchFetch from a wrong API URL. Handle the error gracefully and print "API Failed".
 
-// let add24 = Adder(24);
-// console.log(add24(6));
+// const apiFailed = async() =>{
 
-// Q.2) Unique ID Generator
-
-// const idGenerator = () => {
-
-//     return function() {
-//         let newId = null;
-//         newId = Math.floor(Math.random() * 20);
-//         return newId;
-//     }
-// }
-
-// let gen = idGenerator();
-
-// console.log(gen());
-
-// Q.3) Once function
-
-// function once(fn) {
-//     let called = false;
-//     let result;
-
-//     return function(...args){
-//         if(!called){
-//             result = fn.apply(this, args);
-//             called = true;
-//         }
-//         return result;
-//     }
-// }
-
-// const addMe = (a, b) => a + b;
-
-// const onceAdd = once(addMe);
-// console.log(onceAdd(20, 30));
-// console.log(onceAdd(70, 30));
-// console.log(onceAdd(80, 30));
-
-//Q.4) Remember Me
-
-// const remember = () => {
-//     let arr = [];
-//   return function (...args) {
-//       arr.push(...args);
-//       return arr;
-//       };
-// };
-
-// const r = remember();
-// r(1, 2);
-// r('a');
-// r(3, 4, 5);
-// console.log(r());
-
-/// ------ Hard concept ----------
-
-//Q.2) Toggle concept
-
-// function toggle() {
-//   let alternate = false;
-//   return function (){
-//        alternate = !alternate;
-//        return alternate ? "ON" : "OFF";
+//   try {
+//     let res = fetch('https://jsonplaceholder.typ/posts/1');
+//     let data = await res.json();
+    
+//     console.log(data);
+  
+//   } catch (error) {
+//      throw new Error("API Failed... Try Again...");
 //   }
-
-//   };
-
-// let qw = toggle();
-// console.log(qw());
-// console.log(qw());
-// console.log(qw());
-// console.log(qw());
-
-// Q.3) Module pattern
-// function bankAccount() {
-//   let balance = 3000;
-
-//   return {
-//     deposit: (amount) => {
-//       balance = balance + amount;
-//       return balance;
-//     },
-//     withDraw: (amount) => {
-//       if (balance > amount) {
-//         balance = balance - amount;
-//         return balance;
-//       }
-//     },
-
-//     getBalance: () => {
-//       return balance;
-//     },
-//   };
 // }
 
-// const depo = bankAccount();
-// console.log(depo.deposit(800));
-// console.log(depo.withDraw(400));
-// console.log(depo.getBalance());
+// apiFailed();
 
-// Rate Limiter
 
-function rateLimiter(fn, limit) {
-  let lmt = 0;
-  return function (...args) {
-    if (lmt < limit) {
-      lmt++;
-      return fn(...args);
+// 
+
+// const multipleAPI = async() => {
+
+//   fetch('https://jsonplaceholder.typicode.com/users/1')
+//   .then((res)=> {
+//     console.log(res.json());
+//     return fetch('https://jsonplaceholder.typicode.com/posts/1')
+//   })
+
+//   .then((res)=> {
+//     console.log(res.json());
+//     return fetch('https://jsonplaceholder.typicode.com/comments/1')
+//   })
+//   .then(res=> console.log(res.json()))
+//   .catch(err => console.log(err));
+  
+// }
+
+// await multipleAPI();
+
+
+// Q.3) 
+
+// const allPromises = async() => {
+//   const res1 = await fetch('https://jsonplaceholder.typicode.com/users/1');
+
+//   const res2 = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+
+//   Promise.all([res1, res2])
+//   .then(res => console.log(res))
+//   .catch(err => console.log(err));
+// }
+
+// allPromises();
+
+
+
+
+//Q.4) 
+
+// const withTimeout = (promise, ms) => {
+
+//    const res = setTimeout(()=> {
+//        promise
+//        .then(res => console.log(res))
+//        .catch(err => console.log(err))
+//    }, ms)
+
+//    return res;
+// }
+
+
+// const pr1 = Promise.resolve("Promise resolved");
+
+//  withTimeout(pr1, 2000)
+
+
+
+
+// Q.5) Implement a function that resolves with the first successful promise, or rejects if all fail.
+
+
+// const allPromises = (p1,p2) => {
+
+//     Promise.any([p1, p2])
+//     .then(res => console.log(res))
+//     .catch(err => console.log("One of the execution failed"))
+// }
+
+// const p1 = Promise.reject("P1 rejected");
+// const p2 = Promise.reject("P2 rejected");
+
+// allPromises(p1, p2);
+
+
+
+
+// ------- CLosure  ------------
+
+//QA.1)  Multiplier factory
+
+// const multiplier = (factor) => {
+//     return function(n){
+//        return factor * n;
+//     }
+// }
+
+// let mul5 = multiplier(5);
+// console.log(mul5(6));
+
+
+
+//Q.2) limited counter 
+
+function maxLimit(max) {
+     let count = 0;
+    return function(){
+         if(count < max){
+            count ++;
+         }
+
+         return count;
     }
-    return null;
-  };
 }
 
+let max = maxLimit(4);
 
-const on = (val) => {return val};
+console.log(max());
+console.log(max());
+console.log(max());
+console.log(max());
+console.log(max());console.log(max());console.log(max());
 
-const app = rateLimiter(on, 3);
-console.log(app("summer"));
+
+// Remember the previous input
