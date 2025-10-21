@@ -25,10 +25,6 @@
 
 //  expect(5).toBe(5);
 
-
-
-
-
 //  Ques -2 ( Apply Transform over Each Element in Array)
 
 // var map = function(arr, fn) {
@@ -39,10 +35,6 @@
 
 //       return myArr;
 // }
-
-
-
-
 
 // Ques - 3 (Filter Elements from an Array)
 // var filter = function(arr, fn) {
@@ -55,11 +47,6 @@
 //     return myArr;
 // };
 
-
-
-
-
-
 //  Ques - 4(Array reduce Transformation)
 
 // var reduce = (nums, init, fn) => {
@@ -69,26 +56,51 @@
 //  }
 // }
 
-// // output -> Explain 
+// // output -> Explain
 // let nums = [1, 2, 3, 4];
 // let fn = function sum(accum, curr) { return accum + curr; }
 // let init = 0;
 
 // console.log(reduce(nums, fn, init)); // Output: 10
 
+// // Ques - 5(Function Composition)
+
+// var compose = function (functions) {
+//   return function (x) {
+//     let temp = x;
+//     if (functions.length === 0) {
+//       return x;
+//     }
+
+//     for (let i = functions.length - 1; i >= 1; i--) {
+//       temp = functions[i](temp);
+//     }
+
+//     return temp;
+//   };
+// };
+
+// const fn = compose([(x) => x + 1, (x) => 2 * x]);
+// console.log(fn(4));
 
 
-
-
-// Ques - 5(Function Composition)
-var compose = function(functions) {
-    
-    return function(x) {
-        
+var kthFactor = function(n, k) {
+    if( n=== k){
+        return -1;
     }
-};
 
-/**
- * const fn = compose([x => x + 1, x => 2 * x])
- * fn(4) // 9
- */
+    let arr = [];
+  
+    for(let i=1; i<=n; i++){
+        if(n % i === 0){
+            arr.push(i);
+        }
+    }
+
+
+    console.log(arr);
+
+    let val = arr.find((num, idx)=> idx + 1 === k ? num : "");
+    return val;
+};
+console.log(kthFactor(7, 2));
