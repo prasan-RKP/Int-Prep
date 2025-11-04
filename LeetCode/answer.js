@@ -52,41 +52,61 @@
 
 // Q.4) imp Question
 
-const functions = [
-  () => new Promise((res) => setTimeout(() => res(1), 300)),
-  () => new Promise((res) => setTimeout(() => res(2), 200)),
-  () => new Promise((res) => setTimeout(() => res(2), 200)),
-  () => new Promise((_, reject) => setTimeout(() => reject("C Failed ❌"))),
-];
+// const functions = [
+//   () => new Promise((res) => setTimeout(() => res(1), 300)),
+//   () => new Promise((res) => setTimeout(() => res(2), 200)),
+//   () => new Promise((res) => setTimeout(() => res(2), 200)),
+//   () => new Promise((_, reject) => setTimeout(() => reject("C Failed ❌"))),
+// ];
 
-function promiseAll(functions) {
+// function promiseAll(functions) {
  
- return new Promise((resolve, reject)=> {
+//  return new Promise((resolve, reject)=> {
       
-      let results = [];
-      let completed = 0;
+//       let results = [];
+//       let completed = 0;
 
-      if(functions.length === 0){
-        resolve([]);
-        return;
-      }
+//       if(functions.length === 0){
+//         resolve([]);
+//         return;
+//       }
 
-      functions.forEach((fn, idx) => {
-        try{
-           fn()
-           .then(val => {
-            results[idx] = val;
-            completed++;
+//       functions.forEach((fn, idx) => {
+//         try{
+//            fn()
+//            .then(val => {
+//             results[idx] = val;
+//             completed++;
 
-            if(completed === functions.length){
-                resolve(results)
-            }
-           })
-        }
-        catch(err){
+//             if(completed === functions.length){
+//                 resolve(results)
+//             }
+//            })
+//         }
+//         catch(err){
 
-        }
-      })
- })
-}
+//         }
+//       })
+//  })
+// }
 
+
+
+
+// Q.5) 
+
+
+var map = function(arr, fn) {
+ let myArr = [];
+
+ for(let i=0; i<arr.length; i++){
+    myArr.push(fn(arr[i]), i);
+ }
+      
+};
+
+
+let arr = [1,2,3];
+function plusone(n) { return n + 1; }
+
+console.log(map(arr, plusone));
